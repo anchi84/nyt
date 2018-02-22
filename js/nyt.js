@@ -38,7 +38,7 @@ function Articles(props){
           <div> 
             {
               props.articles.map(
-                (url, index) => <Url key={index} url={url}/>
+                (article, index) => <Url key={index} url={article.web_url}/>
               )
             }
           </div>
