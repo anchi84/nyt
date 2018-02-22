@@ -28,9 +28,25 @@ class Response extends React.Component {
 
             render() {
                 const articles = this.state.articles.slice(0, 20);
-                // const articles = this.state.articles;
-                return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
+                // return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
+                return <Articles articles={articles}/>;   
             }
+}
+
+function Articles(props){
+        return (
+          <div> 
+            {
+              props.articles.map(
+                (url, index) => <Url key={index} url={url}/>
+              )
+            }
+          </div>
+        );
+      }
+
+function Url(props){
+    return <p><a href={props.url} target="_blank">{props.url}</a></p>;
 }
 
 $('#find').click(function() {
