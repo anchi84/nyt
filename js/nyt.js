@@ -27,17 +27,9 @@ class Response extends React.Component {
             }
 
             render() {
-                var date = document.getElementById('date').value;
-                console.log(date);
-                var year = date.split("-")[0];
-                var month = Number(date.split("-")[1]);
-                console.log(year);
-                console.log(month);
                 const articles = this.state.articles.slice(0, 20);
                 // const articles = this.state.articles;
-                const res = articles.filter(article => year == article.pub_date.split("-")[0] && month == article.pub_date.split("-")[1]);
-                console.log(res);
-                return (res.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
+                return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
             }
 }
 
