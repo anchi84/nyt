@@ -29,7 +29,7 @@ class Response extends React.Component {
             render() {
                 const articles = this.state.articles.slice(0, 20);
                 // return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
-                return <Articles articles={articles}/>;   
+                return <Articles articles={articles.map(article => article.web_url)};   
             }
 }
 
@@ -38,7 +38,7 @@ function Articles(props){
           <div> 
             {
               props.articles.map(
-                (article, index) => <Url key={index} url={article.web_url}/>
+                (article, index) => <Url key={index} url={article}/>
               )
             }
           </div>
