@@ -2,16 +2,24 @@ class Response extends React.Component {
             
             constructor(props) {
                 super(props);
-                this.state = {urls: []};
+                this.state = {articles: []};
             }
 
             componentDidMount() {
+                var date = document.getElementById('date').value;
+                console.log(date);
+                var year = date.split("-")[0];
+                var month = date.split("-")[1];
+                if(month[0] == "0") {
+                    month = month[1];
+                }
+                console.log(year);
+                console.log(month);
                 $.ajax({
-                    url: "https://api.nytimes.com/svc/archive/v1/2016/1.json?api-key=be3ab30bcbd64f3492955d2aa48b0567",
+                    url: "https://api.nytimes.com/svc/archive/v1/"+year +"/" +month +".json?api-key=be3ab30bcbd64f3492955d2aa48b0567",
                     method: 'GET',
                 }).done((result)=> {
-                            // var res = result.response.docs.slice(0,20);
-                            this.setState({urls: result.response.docs});
+                            this.setState({articles: result.response.docs});
                             console.log(result);
                          }).fail(function(err) {
                             throw err;
@@ -19,9 +27,21 @@ class Response extends React.Component {
             }
 
             render() {
-                const urls = this.state.urls.slice(0, 20);
-                return (urls.map(url => <a href={url.web_url}>{url.headline.main}<br/></a>));
+                var date = document.getElementById('date').value;
+                console.log(date);
+                var year = date.split("-")[0];
+                var month = Number(date.split("-")[1]);
+                console.log(year);
+                console.log(month);
+                const articles = this.state.articles.slice(0, 20);
+                // const articles = this.state.articles;
+                const res = articles.filter(article => year == article.pub_date.split("-")[0] && month == article.pub_date.split("-")[1]);
+                console.log(res);
+                return (res.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
             }
 }
 
-ReactDOM.render(<Response/>, document.getElementById('root'));
+$('#find').click(function() {
+        const root = document.getElementById('root');
+        ReactDOM.render(<Response/>,  root);
+});
