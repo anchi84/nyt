@@ -29,7 +29,7 @@ class Response extends React.Component {
 
             render() {
                 console.log('render');
-                const articles = this.state.articles.slice(0, 20);
+                const articles = this.state.articles.slice(0, 1);
                 // return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
                 return <Articles articles={articles.map(article => article.web_url)}/>;   
             }
@@ -47,8 +47,37 @@ function Articles(props){
         );
       }
 
-function Url(props){
-    return <p><a href={props.url} target="_blank">{props.url}</a></p>;
+class Url extends React.Component {
+    
+    constructor(props) {
+                super(props);
+                this.state = {data: []};
+                this.setData = this.setData.bind(this);
+    }
+
+    setData(result) {
+        console.log(result);
+        this.setState({data: result})
+    }
+
+    componentDidMount() {
+        $.ajax({
+        url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
+        success: this.setData
+    });
+
+    }
+
+    render() {
+        // return <p><a href={this.props.url} target="_blank">{this.props.url}</a></p>;
+        return (
+            <div>
+                <h1>{this.state.data.title}</h1>
+                <img src={this.state.data.image} alt="Smiley face" height="200"/>
+                <p>{this.state.data.description}</p>
+            </div>
+        )
+    }
 }
 
 $('#find').click(function() {
