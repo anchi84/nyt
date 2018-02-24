@@ -13,7 +13,7 @@ class Response extends React.Component {
             refresh(y, m){
                 $.ajax({
                     url: "https://api.nytimes.com/svc/archive/v1/"+y +"/" +m +".json?api-key=be3ab30bcbd64f3492955d2aa48b0567",
-                    method: 'GET',
+                    method: 'GET'
                 }).done((result)=> {
                             this.setState({articles: result.response.docs});
                             console.log(result);
@@ -29,7 +29,7 @@ class Response extends React.Component {
 
             render() {
                 console.log('render');
-                const articles = this.state.articles.slice(0, 1);
+                const articles = this.state.articles.slice(0, 2);
                 // return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
                 return <Articles articles={articles.map(article => article.web_url)}/>;   
             }
@@ -52,20 +52,18 @@ class Url extends React.Component {
     constructor(props) {
                 super(props);
                 this.state = {data: []};
-                this.setData = this.setData.bind(this);
-    }
-
-    setData(result) {
-        console.log(result);
-        this.setState({data: result})
     }
 
     componentDidMount() {
         $.ajax({
         url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
-        success: this.setData
-    });
-
+        method: 'GET'
+        }).done((result)=> {
+                    this.setState({data: result});
+                    console.log(result);
+                    }).fail(function(err) {
+                    throw err;
+            });
     }
 
     render() {
