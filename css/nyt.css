@@ -1,1 +1,16 @@
+.response {
+    display: flex;
+}
 
+.master {
+    float: left;
+    width: 75%;
+}
+
+.details {
+    float: left;
+    width: 25%;
+    background-color: grey;
+    color: orange;
+    font-weight: bold;
+}

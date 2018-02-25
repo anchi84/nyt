@@ -2,8 +2,12 @@ class Response extends React.Component {
             
             constructor(props) {
                 super(props);
-                this.state = {articles: []};
+                this.state = {
+                    articles: [],
+                    selectedArticle: []     
+                };
                 this.refresh = this.refresh.bind(this);
+                this.handleImgClick = this.handleImgClick.bind(this);
             }
 
             componentWillReceiveProps(nextProps){
@@ -27,24 +31,47 @@ class Response extends React.Component {
                 this.refresh(this.props.year, this.props.month);
             }
 
+            handleImgClick(item) {
+                console.log("hello from handleImgClick")
+                this.setState({selectedArticle: item})
+            }
+
             render() {
                 console.log('render');
-                const articles = this.state.articles.slice(0, 2);
+                const articles = this.state.articles.slice(0, 1);
                 // return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));
-                return <Articles articles={articles.map(article => article.web_url)}/>;   
+                // return <Articles articles={articles.map(article => article.web_url)}
+                //                 onImgClick={this.handleImgClick}/>;   
+            
+                return (
+                    <div className="response">
+                        <div className="master">
+                            <Articles articles={articles.map(article => article.web_url)}
+                                onImgClick={this.handleImgClick}/>
+                        </div>
+                        <div className="details">
+                            <ArticleDetails
+                                article={this.state.selectedArticle}/>
+                        </div>
+                    </div>
+                );
             }
 }
 
-function Articles(props){
-        return (
-          <div> 
-            {
-              props.articles.map(
-                (article, index) => <Url key={index} url={article}/>
-              )
-            }
-          </div>
-        );
+class Articles extends React.Component {
+        render() {
+            const onImgClick = this.props.onImgClick;
+            return (
+                <div> 
+                {
+                  this.props.articles.map(
+                    (article, index) => <Url key={index} url={article} clickHandler={onImgClick}/>
+                  )
+                }
+                </div>
+            );
+        }
+        
       }
 
 class Url extends React.Component {
@@ -56,6 +83,7 @@ class Url extends React.Component {
 
     componentDidMount() {
         $.ajax({
+        // url: "https://api.linkpreview.net?key=5a8c62f97676dad065b7f42514cf709a26b3bb95f39ee&q="+this.props.url,
         url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
         method: 'GET'
         }).done((result)=> {
@@ -68,15 +96,26 @@ class Url extends React.Component {
 
     render() {
         // return <p><a href={this.props.url} target="_blank">{this.props.url}</a></p>;
-        return (
+        const clickHandler = this.props.clickHandler;
+        return (  
             <div>
                 <h1>{this.state.data.title}</h1>
-                <img src={this.state.data.image} alt="Smiley face" height="200"/>
+                <img src={this.state.data.image} onClick={()=>clickHandler(this.state.data.url)} alt="Smiley face" height="200"/>
                 <p>{this.state.data.description}</p>
             </div>
         )
     }
 }
+
+const ArticleDetails = (props) => {
+            const article = props.article;
+            console.log("hello from ArticleDetails")
+            return (
+                <div>
+                    {article}
+                </div>
+            );
+        }
 
 $('#find').click(function() {
 
