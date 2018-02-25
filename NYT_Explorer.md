@@ -50,7 +50,7 @@ Note: Please, use only English in your source code!
 - Display search results in 2x10 grid on tablet
 - Display search results in 1x20 grid on mobile
 - Each search result display item must have: title, description and preview image
-- Search result details display must contain stringified JSON that is in preatty print format
+- Search result details display must contain stringified JSON that is in pretty print format
 - Optional: display some progress during fetching articles
 - Optional: display all results in pages
 - Optional: support "Add to Bookmarks" button for selected search result display item

@@ -4,13 +4,67 @@
 
 .master {
     float: left;
-    width: 75%;
+    width: 60%;
 }
 
 .details {
-    float: left;
-    width: 25%;
+    float: right;
+    position: sticky;
+    align-self: flex-start;
+    top: 100px;
+    bottom: 50%;
+    width: 40%;
     background-color: grey;
-    color: orange;
     font-weight: bold;
 }
+
+.split {
+    float: left;
+    background-color: black;
+    width: 1px;
+}
+
+header, footer, section { 
+    text-align: center;
+    position: fixed; 
+    right: 0;
+    left: 0
+}
+
+header{
+   height: 100px; 
+   top: 0;
+}
+
+footer{
+  height: 100px; 
+  bottom: 50px;
+}
+
+section {
+  top:100px;
+  bottom:150px;
+  overflow: auto;
+}
+
+/*body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+header {
+    flex-shrink: 0;
+}
+
+section {
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 2em;
+}
+
+footer {
+    flex-shrink: 0;
+}*/
