@@ -40,7 +40,7 @@ class Response extends React.Component {
 
     render() {
         console.log('render');
-        const articles = this.state.articles.slice(0, 3);
+        const articles = this.state.articles.slice(0, 20);
         // return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));   
             
         return (
@@ -100,9 +100,9 @@ class Url extends React.Component {
         // return <p><a href={this.props.url} target="_blank">{this.props.url}</a></p>;
         const clickHandler = this.props.clickHandler;
         return (  
-            <div>
+            <div className="preview">
                 <h1>{this.state.data.title}</h1>
-                <img src={this.state.data.image} onClick={()=>clickHandler(this.props.article)} alt="NY Times Article" height="200"/>
+                <img src={this.state.data.image} onClick={()=>clickHandler(this.props.article)} alt="NY Times Article" width="50%"/>
                 <p>{this.state.data.description}</p>
             </div>
         )

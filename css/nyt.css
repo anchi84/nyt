@@ -1,9 +1,15 @@
 .response {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
 }
 
 .master {
     float: left;
+    display: flex;
+    flex-flow: row wrap;
     width: 60%;
 }
 
@@ -12,9 +18,8 @@
     position: sticky;
     align-self: flex-start;
     top: 100px;
-    bottom: 50%;
     width: 40%;
-    background-color: grey;
+    /*background-color: grey;*/
     font-weight: bold;
 }
 
@@ -22,6 +27,27 @@
     float: left;
     background-color: black;
     width: 1px;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .preview {
+        float: left;
+        width: 100%;
+    }
+}
+
+@media screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    .preview {
+        float: left;
+        width: 50%;
+    }
+}
+
+@media screen and (min-width : 1224px) {
+    .preview {
+        float: left;
+        width: 25%;
+    }
 }
 
 header, footer, section { 
@@ -32,39 +58,17 @@ header, footer, section {
 }
 
 header{
-   height: 100px; 
+   height: 15%;
    top: 0;
 }
 
 footer{
-  height: 100px; 
-  bottom: 50px;
+  height: 25%; 
+  bottom: 0;
 }
 
 section {
-  top:100px;
-  bottom:150px;
+  top:15%;
+  bottom:25%;
   overflow: auto;
 }
-
-/*body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-}
-
-header {
-    flex-shrink: 0;
-}
-
-section {
-    flex-grow: 1;
-    overflow: auto;
-    min-height: 2em;
-}
-
-footer {
-    flex-shrink: 0;
-}*/
