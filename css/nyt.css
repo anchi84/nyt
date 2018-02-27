@@ -29,7 +29,12 @@
     width: 1px;
 }
 
-@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+.preview {
+        float: left;
+        width: 25%;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 736px) {
     .preview {
         float: left;
         width: 100%;
@@ -43,13 +48,6 @@
     }
 }
 
-@media screen and (min-width : 1224px) {
-    .preview {
-        float: left;
-        width: 25%;
-    }
-}
-
 header, footer, section { 
     text-align: center;
     position: fixed; 
@@ -58,17 +56,25 @@ header, footer, section {
 }
 
 header{
-   height: 15%;
+   height: 15vh;
    top: 0;
 }
 
 footer{
-  height: 25%; 
+  height: 25vh; 
   bottom: 0;
 }
 
 section {
-  top:15%;
-  bottom:25%;
+  top:15vh;
+  bottom:25vh;
   overflow: auto;
+}
+
+h1 {
+    font-size: 4vh;
+}
+
+footer, label, #date, #find {
+    font-size: 3vh;
 }

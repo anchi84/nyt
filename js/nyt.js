@@ -4,7 +4,7 @@ class Response extends React.Component {
             super(props);
             this.state = {
                 articles: [],
-                selectedArticle: "Article details"     
+                selectedArticle: "Click on image to see article details!"     
             };
             this.refresh = this.refresh.bind(this);
             this.handleImgClick = this.handleImgClick.bind(this);
@@ -84,8 +84,8 @@ class Url extends React.Component {
 
     componentDidMount() {
         $.ajax({
-        url: "https://api.linkpreview.net?key=5a8c62f97676dad065b7f42514cf709a26b3bb95f39ee&q="+this.props.url,
-        // url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
+        // url: "https://api.linkpreview.net?key=5a8c62f97676dad065b7f42514cf709a26b3bb95f39ee&q="+this.props.url,
+        url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
         method: 'GET'
         }).done((result)=> {
                     this.setState({data: result});
@@ -115,7 +115,7 @@ const ArticleDetails = (props) => {
             return (
                 <div>
                     <p>Article details:</p>
-                    {JSON.stringify(article, null, '\t')}
+                    <p>{JSON.stringify(article, null, '\t')}</p>
                 </div>
             );
 }
