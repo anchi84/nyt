@@ -84,8 +84,8 @@ class Url extends React.Component {
 
     componentDidMount() {
         $.ajax({
-        // url: "https://api.linkpreview.net?key=5a8c62f97676dad065b7f42514cf709a26b3bb95f39ee&q="+this.props.url,
-        url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
+        url: "https://api.linkpreview.net?key=5a8c62f97676dad065b7f42514cf709a26b3bb95f39ee&q="+this.props.url,
+        // url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
         method: 'GET'
         }).done((result)=> {
                     this.setState({data: result});
