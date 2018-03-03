@@ -36,9 +36,9 @@ class Response extends React.Component {
         console.log("current month " +currentMonth);
 
         if(y < 1851 || (y == 1851 && m < 9)) {
-            this.setState({msg: "You can search articles going back to September, 1851!"})
+            this.setState({msg: "You can search articles going back to September, 1851! Try again!"})
         } else if( y > currentYear || (y == currentYear && m > currentMonth)) {
-            this.setState({msg: "Try with that date in the future!"})
+            this.setState({msg: "Try with that date in the future! Now try again with existing one!"})
         } else {
             this.setState({msg: ""})
             $.ajax({
@@ -49,6 +49,7 @@ class Response extends React.Component {
                     console.log("Hello from NYT");
                     console.log(result);
             }).fail(function(err) {
+                        // console.log(err);
                         throw err;
             });
         }
@@ -87,9 +88,9 @@ class Articles extends React.Component {
         const onImgClick = this.props.onImgClick;
         const selectedID = this.props.selectedID;
         return (
-            <div>
-                <p>&emsp;{this.props.msg}</p> 
-                {   
+            <div> 
+                <p className="msg">{this.props.msg}</p>
+                { 
                     this.props.articles.map(
                         (article, index) => <Url key={article.web_url}
                                             article={article} 
@@ -112,8 +113,8 @@ class Url extends React.Component {
 
     componentDidMount() {
         $.ajax({
-        // url: "https://api.linkpreview.net?key=5a8c62f97676dad065b7f42514cf709a26b3bb95f39ee&q="+this.props.url,
-        url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
+        url: "https://api.linkpreview.net?key=5a8c62f97676dad065b7f42514cf709a26b3bb95f39ee&q="+this.props.url,
+        // url: "https://api.linkpreview.net?key=123456&q=https://www.google.com",
         method: 'GET'
         }).done((result)=> {
             this.setState({data: result});
@@ -129,8 +130,8 @@ class Url extends React.Component {
         const clickHandler = this.props.clickHandler;
         return (  
             <div className={"preview" + (this.props.selectedID === this.props.article._id ? " selected-article":"")}>
-                <h1>{this.state.data.title}</h1>
-                <img className="article-image" src={this.state.data.image} onClick={()=>clickHandler(this.props.article)} alt="NY Times Article" width="50%"/>
+                <h2>{this.state.data.title}</h2>
+                <img className="article-image" src={this.state.data.image} onClick={()=>clickHandler(this.props.article)} alt="NY Times Article" width="60%"/>
                 <p>{this.state.data.description}</p>
             </div>
         )
@@ -144,7 +145,7 @@ const ArticleDetails = (props) => {
         <div>
             <p>Click on image to see article details!</p>
             {/*<p>{JSON.stringify(article, null, '\t')}</p>*/}
-            <h1>{article.new_desk}</h1>
+            <h2>{article.new_desk}</h2>
             <p>{article.snippet}</p>
             <p>{article.byline ? article.byline.original : ""}</p>
             <p>{article.pub_date.split("T")[0].replace(/-/g, "/")}</p>

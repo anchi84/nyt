@@ -1,10 +1,13 @@
+html {
+    background-image: url("../img/whitepaper.jpg");
+}
+
 .response {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     width: 100%;
     height: 100%;
-    padding: 1%;
 }
 
 .master {
@@ -18,6 +21,7 @@
     float: right;
     position: sticky;
     align-self: flex-start;
+    top: 70px;
     width: 38%;
     padding: 1%;
     /*background-color: grey;*/
@@ -31,14 +35,14 @@
     width: 1px;
 }
 
-/*preview details for desktop*/
+/*article preview for desktop*/
 .preview {
         float: left;
         width: 23%;
         padding: 1%;
 }
 
-/*preview details for mobile portrait and landscape*/
+/*article preview for mobile portrait and landscape*/
 @media screen and (min-device-width : 320px) and (max-device-width : 736px) {
     .preview {
         float: left;
@@ -46,7 +50,7 @@
     }
 }
 
-/*preview details for tablet*/
+/*article preview for tablet*/
 @media screen and (min-device-width : 768px) and (max-device-width : 1024px) {
     .preview {
         float: left;
@@ -64,13 +68,11 @@ header, footer, section {
 header{
    height: 15vh;
    top: 0;
-   background-color: grey;
 }
 
 footer{
   height: 25vh; 
   bottom: 0;
-  background-color: grey;
 }
 
 section {
@@ -79,12 +81,16 @@ section {
   overflow: auto;
 }
 
-h1 {
-    font-size: 4vh;
+* {
+    font-size: 3vh;
 }
 
-footer, label, #date, #find {
-    font-size: 3vh;
+h1 {
+    font-size: 5vh;
+}
+
+h2 {
+    font-size: 4vh;
 }
 
 .article-image {
@@ -94,4 +100,12 @@ footer, label, #date, #find {
 .selected-article {
     background-color: #fff8dc;
     /*border: solid 1px blue;*/
+}
+
+/*date error message*/
+.msg {
+    color:red; 
+    font-weight:bold; 
+    text-align: center;
+    text-indent: 1%; 
 }
