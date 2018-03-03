@@ -4,6 +4,7 @@ class Response extends React.Component {
             super(props);
             this.state = {
                 articles: [],
+                msg: "",
                 selectedArticle: {
                     new_desk: "",
                     snippet: "",
@@ -28,17 +29,30 @@ class Response extends React.Component {
     }
 
     refresh(y, m){
-        $.ajax({
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        console.log("current year " +currentYear);
+        const currentMonth = currentDate.getMonth() + 1;
+        console.log("current month " +currentMonth);
+
+        if(y < 1851 || (y == 1851 && m < 9)) {
+            this.setState({msg: "You can search articles going back to September, 1851!"})
+        } else if( y > currentYear || (y == currentYear && m > currentMonth)) {
+            this.setState({msg: "Try with that date in the future!"})
+        } else {
+            this.setState({msg: ""})
+            $.ajax({
             url: "https://api.nytimes.com/svc/archive/v1/"+y +"/" +m +".json?api-key=be3ab30bcbd64f3492955d2aa48b0567",
             method: 'GET'
-        }).done((result)=> {
-                this.setState({articles: result.response.docs});
-                console.log("Hello from NYT");
-                console.log(result);
-                }).fail(function(err) {
-                    throw err;
-                });
+            }).done((result)=> {
+                    this.setState({articles: result.response.docs});
+                    console.log("Hello from NYT");
+                    console.log(result);
+            }).fail(function(err) {
+                        throw err;
+            });
         }
+    }
 
     componentDidMount() {
         this.refresh(this.props.year, this.props.month);
@@ -57,7 +71,7 @@ class Response extends React.Component {
         return (
             <div className="response">
                 <div className="master">
-                    <Articles articles={articles} onImgClick={this.handleImgClick} selectedID={this.state.selectedArticle._id}/>
+                    <Articles articles={articles} msg={this.state.msg} onImgClick={this.handleImgClick} selectedID={this.state.selectedArticle._id}/>
                 </div>
                 <div className="split"/>
                 <div className="details">
@@ -73,8 +87,9 @@ class Articles extends React.Component {
         const onImgClick = this.props.onImgClick;
         const selectedID = this.props.selectedID;
         return (
-            <div> 
-                {
+            <div>
+                <p>{this.props.msg}</p> 
+                {   
                     this.props.articles.map(
                         (article, index) => <Url key={article.web_url}
                                             article={article} 
@@ -131,7 +146,7 @@ const ArticleDetails = (props) => {
             {/*<p>{JSON.stringify(article, null, '\t')}</p>*/}
             <h1>{article.new_desk}</h1>
             <p>{article.snippet}</p>
-            <p>{article.byline.original}</p>
+            <p>{article.byline ? article.byline.original : ""}</p>
             <p>{article.pub_date.split("T")[0].replace(/-/g, "/")}</p>
             <a href={article.web_url} target="_blank">{article.headline.main}</a>
         </div>
