@@ -4,6 +4,7 @@
     flex-wrap: nowrap;
     width: 100%;
     height: 100%;
+    padding: 1%;
 }
 
 .master {
@@ -17,7 +18,6 @@
     float: right;
     position: sticky;
     align-self: flex-start;
-    top: 100px;
     width: 38%;
     padding: 1%;
     /*background-color: grey;*/
@@ -64,11 +64,13 @@ header, footer, section {
 header{
    height: 15vh;
    top: 0;
+   background-color: grey;
 }
 
 footer{
   height: 25vh; 
   bottom: 0;
+  background-color: grey;
 }
 
 section {

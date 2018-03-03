@@ -88,7 +88,7 @@ class Articles extends React.Component {
         const selectedID = this.props.selectedID;
         return (
             <div>
-                <p>{this.props.msg}</p> 
+                <p>&emsp;{this.props.msg}</p> 
                 {   
                     this.props.articles.map(
                         (article, index) => <Url key={article.web_url}
@@ -142,7 +142,7 @@ const ArticleDetails = (props) => {
     console.log("hello from ArticleDetails");
     return (
         <div>
-            <p>Article details:</p>
+            <p>Click on image to see article details!</p>
             {/*<p>{JSON.stringify(article, null, '\t')}</p>*/}
             <h1>{article.new_desk}</h1>
             <p>{article.snippet}</p>
@@ -167,4 +167,13 @@ $('#find').click(function() {
 
     const root = document.getElementById('root');
     ReactDOM.render(<Response year={year} month={month} />,  root);    
+});
+
+$('#date').attr('value', function() {
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth() + 1;
+    if(currentMonth < 10) {
+        currentMonth = "0" +currentMonth;
+    } 
+    return currentDate.getFullYear() +'-' +currentMonth;
 });
