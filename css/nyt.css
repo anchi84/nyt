@@ -18,7 +18,8 @@
     position: sticky;
     align-self: flex-start;
     top: 100px;
-    width: 40%;
+    width: 38%;
+    padding: 1%;
     /*background-color: grey;*/
     font-weight: bold;
 }
@@ -31,20 +32,22 @@
 
 .preview {
         float: left;
-        width: 25%;
+        width: 23%;
+        padding: 1%;
 }
+
 
 @media screen and (min-device-width : 320px) and (max-device-width : 640px) {
     .preview {
         float: left;
-        width: 100%;
+        width: 98%;
     }
 }
 
 @media screen and (min-device-width : 768px) and (max-device-width : 1024px) {
     .preview {
         float: left;
-        width: 50%;
+        width: 48%;
     }
 }
 
@@ -77,4 +80,13 @@ h1 {
 
 footer, label, #date, #find {
     font-size: 3vh;
+}
+
+.article-image {
+    cursor: pointer;
+}
+
+.selected-article {
+    background-color: #fff8dc;
+    /*border: solid 1px blue;*/
 }
