@@ -76,7 +76,7 @@ class Articles extends React.Component {
             <div> 
                 {
                     this.props.articles.map(
-                        (article, index) => <Url key={index}
+                        (article, index) => <Url key={article.web_url}
                                             article={article} 
                                             url={article.web_url} 
                                             clickHandler={onImgClick}
