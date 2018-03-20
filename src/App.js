@@ -1,24 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import $ from 'jquery';
-
-/*class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}*/
 
 class Response extends React.Component {
             
@@ -176,29 +160,67 @@ const ArticleDetails = (props) => {
     );
 }
 
-$('#find').click(function() {
+class Page extends React.Component {
 
-    var date = document.getElementById('date').value;
-    console.log(date);
-    var year = date.split("-")[0];
-    var month = date.split("-")[1];
-    if(month[0] == "0") {
-        month = month[1];
+    constructor(props) {
+            super(props);
+            this.state = {
+                date: null,
+                year: null,
+                month: null
+            }
     }
-    console.log(year);
-    console.log(month);
 
-    const root = document.getElementById('root');
-    ReactDOM.render(<Response year={year} month={month} />,  root);    
-});
+    find(e) {
+        var date = document.getElementById('date').value;
+        console.log(date);
+        var year = date.split("-")[0];
+        var month = date.split("-")[1];
+        if(month[0] == "0") {
+            month = month[1];
+        }
+        console.log(year);
+        console.log(month);
+        this.setState({year: year, month: month})
+        // const root = document.getElementById('root');
+        // ReactDOM.render(<Response year={year} month={month} />,  root);    
+    });
 
-$('#date').attr('value', function() {
-    let currentDate = new Date();
-    let currentMonth = currentDate.getMonth() + 1;
-    if(currentMonth < 10) {
-        currentMonth = "0" +currentMonth;
-    } 
-    return currentDate.getFullYear() +'-' +currentMonth;
-});
+    current() {
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth() + 1;
+        if(currentMonth < 10) {
+            currentMonth = "0" +currentMonth;
+        } 
+        let date = currentDate.getFullYear() +'-' +currentMonth;
+        this.setState({date: date})
+    });
 
-export default Response;
+
+    render(){
+        return (
+            <div>
+                <header>
+                    <h1>NYT Archive Explorer!</h1>
+                <hr/>
+                </header>
+                <section>
+                    <label>Search New York Times Archive by date!</label>
+                    <br/>
+                    <input id="date" type="month" value={()=>this.current()}/>
+                    <input type="button" id="find" value="Find" onClick={()=>this.find}/>
+                    <hr/>
+                    <Response year={this.state.year} month={this.state.month} />
+                </section>
+                <footer>
+                    <hr/>
+                    <a href="https://developer.nytimes.com/" target="_blank"><img src="img/logo.png" height="25vh"/></a>
+                    <p>Links preview by LinkPreview API</p>
+                    <p>&copy; Anchi 2018</p>
+                </footer>
+            </div>
+    );
+    }
+}
+
+export default Page;
