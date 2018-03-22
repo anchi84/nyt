@@ -1,6 +1,6 @@
-/*html {
-    background-image: url("../img/whitepaper.jpg");
-}*/
+html {
+    background-image: url("./img/whitepaper.jpg");
+}
 
 .response {
     display: flex;

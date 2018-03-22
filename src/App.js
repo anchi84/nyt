@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-// import logo from './logo.svg';
 import './App.css';
 import $ from 'jquery';
+import logo from './img/logo.png'
 
 class Response extends React.Component {
             
@@ -165,14 +165,14 @@ class Page extends React.Component {
     constructor(props) {
             super(props);
             this.state = {
-                date: null,
+                date: this.current(),
                 year: null,
                 month: null
             }
     }
 
-    find(e) {
-        var date = document.getElementById('date').value;
+    find() {
+        var date = this.state.date;
         console.log(date);
         var year = date.split("-")[0];
         var month = date.split("-")[1];
@@ -181,10 +181,8 @@ class Page extends React.Component {
         }
         console.log(year);
         console.log(month);
-        this.setState({year: year, month: month})
-        // const root = document.getElementById('root');
-        // ReactDOM.render(<Response year={year} month={month} />,  root);    
-    });
+        this.setState({year: year, month: month});  
+    }
 
     current() {
         let currentDate = new Date();
@@ -193,8 +191,13 @@ class Page extends React.Component {
             currentMonth = "0" +currentMonth;
         } 
         let date = currentDate.getFullYear() +'-' +currentMonth;
-        this.setState({date: date})
-    });
+        return date;
+    }
+
+    handleChange(e) {
+      console.log(e.target.value);
+      this.setState({date: e.target.value});
+    }
 
 
     render(){
@@ -207,14 +210,14 @@ class Page extends React.Component {
                 <section>
                     <label>Search New York Times Archive by date!</label>
                     <br/>
-                    <input id="date" type="month" value={()=>this.current()}/>
-                    <input type="button" id="find" value="Find" onClick={()=>this.find}/>
+                    <input id="date" type="month" value={this.state.date} onChange={(event)=>this.handleChange(event)}/>
+                    <input type="button" id="find" value="Find" onClick={(event)=>this.find(event)}/>
                     <hr/>
                     <Response year={this.state.year} month={this.state.month} />
                 </section>
                 <footer>
                     <hr/>
-                    <a href="https://developer.nytimes.com/" target="_blank"><img src="img/logo.png" height="25vh"/></a>
+                    <a href="https://developer.nytimes.com/" target="_blank"><img src={logo} height="25vh"/></a>
                     <p>Links preview by LinkPreview API</p>
                     <p>&copy; Anchi 2018</p>
                 </footer>
