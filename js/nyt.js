@@ -66,7 +66,7 @@ class Response extends React.Component {
 
     render() {
         console.log('render');
-        const articles = this.state.articles.slice(0, 20);
+        const articles = this.state.articles.slice(0, 16);
         // return (articles.map((article,index) => <a href={article.web_url} target="_blank" key={index}>{article.headline.main}<br/></a>));   
             
         return (
